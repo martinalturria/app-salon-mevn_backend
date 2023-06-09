@@ -1,3 +1,4 @@
+import colors from "colors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
@@ -9,11 +10,9 @@ export const db = async () => {
         const db = await mongoose.connect(process.env.MONGO_URI);
         const url = `${db.connection.host}:${db.connection.port}`;
 
-        console.log("MongoSB se conecto correctamente", url);
+        console.log(colors.cyan("MongoSB se conecto correctamente", url));
     } catch (error) {
         console.log(`Error: ${error.message}`);
         process.exit(1); // Si falla la conexion, detenemos la ejecucion del Programa (0) es todo bien (1) es Error
     }
 };
-
-console.log("Probando GIT");

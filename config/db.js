@@ -15,3 +15,5 @@ export const db = async () => {
         process.exit(1); // Si falla la conexion, detenemos la ejecucion del Programa (0) es todo bien (1) es Error
     }
 };
+
+console.log("Probando GIT");

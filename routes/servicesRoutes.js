@@ -4,16 +4,17 @@ import {
     getServices,
     getServiceById,
     updateService,
-    deleteService
+    deleteService,
 } from "../controllers/ServicesControllers.js";
 
 const router = Router();
 
-router.post("/", createServices);
-router.get("/", getServices);
+router.route("/").post(createServices).get(getServices);
 
-router.get("/:id", getServiceById);
-router.put("/:id", updateService);
-router.delete("/:id", deleteService)
+router
+    .route("/:id")
+    .get(getServiceById)
+    .put(updateService)
+    .delete(deleteService);
 
 export default router;

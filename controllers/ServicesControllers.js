@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { services } from "../data/beautyServices.js";
 import Services from "../models/Services.js";
 import { validateObject, validateService } from "../helpers/index.js";
@@ -14,16 +13,22 @@ const createServices = async (req, res) => {
         const service = new Services({ name, price });
         await service.save();
 
-        res.status(201).json({
+        return res.status(201).json({
             message: "El Servicio se Registro Correctamente",
         });
     } catch (error) {
-        res.status(400).json({ Error: error.message });
+        return res.status(400).json({ Error: error.message });
     }
 };
 
-const getServices = (req, res) => {
-    res.json(services);
+const getServices = async (req, res) => {
+    try {
+        const services = await Services.find();
+
+        return res.status(200).json(services);
+    } catch (error) {
+        return res.status(404).json({ Error: error.message });
+    }
 };
 
 const getServiceById = async (req, res) => {
@@ -38,9 +43,11 @@ const getServiceById = async (req, res) => {
         // validar service
         validateService(service);
 
-        res.status(200).json({ name: service.name, price: service.price });
+        return res
+            .status(200)
+            .json({ name: service.name, price: service.price });
     } catch (error) {
-        res.status(404).json({ Error: error.message });
+        return res.status(404).json({ Error: error.message });
     }
 };
 
@@ -60,7 +67,7 @@ const updateService = async (req, res) => {
 
         await service.save();
 
-        res.status(200).json({
+        return res.status(200).json({
             message: "El Servicio se Actualizo Correctamente",
         });
     } catch (error) {
@@ -79,11 +86,11 @@ const deleteService = async (req, res) => {
 
         await service.deleteOne();
 
-        res.status(200).json({
+        return res.status(200).json({
             message: "El Servicio se Elimino Correctamente",
         });
     } catch (error) {
-        res.status(404).json({ Error: error.message });
+        return res.status(404).json({ Error: error.message });
     }
 };
 

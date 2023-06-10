@@ -1,10 +1,19 @@
 import { Router } from "express";
-import { services } from "../data/beautyServices.js";
+import {
+    createServices,
+    getServices,
+    getServiceById,
+    updateService,
+    deleteService
+} from "../controllers/ServicesControllers.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.json(services);
-});
+router.post("/", createServices);
+router.get("/", getServices);
+
+router.get("/:id", getServiceById);
+router.put("/:id", updateService);
+router.delete("/:id", deleteService)
 
 export default router;

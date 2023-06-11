@@ -8,7 +8,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "seed:import": "node data/seed.js --import",
-    "seed:destroy": "node data/seed.js --destroy"
+    "seed:destroy": "node data/seed.js --destroy",
+    "dev:insomnia" : "nodemon index.js --insomnia" 
   },
   "author": "Martin Alturria",
   "license": "ISC",
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.2.3"
   }
